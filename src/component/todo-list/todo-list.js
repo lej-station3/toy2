@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux';
 import { insertCard } from '../../modules/list';
 
 //리스트 큰 창을 만들자
-function TodoList({ data,handleCreateList }) {
-  const { title, cards,listID } = data;
+function TodoList({ data,listID }) {
+  const { title, cards } = data;
   const dispatch = useDispatch();
-  
+
   const [text, setText] = useState('');
 
 

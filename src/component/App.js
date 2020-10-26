@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 function App() {
 
   const { list } = useSelector(state => state);
+  const { listID } = list;
   
   const AppWrapper = styled.div`
     display: flex;
@@ -33,9 +34,9 @@ function App() {
         {list.map(data => (
           <TodoList 
             key={data.id}
+            listID={listID}
             data = {data}     
           />
-
         ))}
      
       </AppWrapper>
