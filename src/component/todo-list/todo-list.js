@@ -1,17 +1,47 @@
-import React from "react";
-import TodoCard from "./todo-card";
-import styled from "styled-components";
-import TodoButtonWrapper from "../../todo-button/todo-button-wrapper";
+import React, { useState } from 'react';
+import TodoCard from './todo-card';
+import TodoButtonWrapper from '../../todo-button/todo-button-wrapper';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { insertCard } from '../../modules/list';
 
 //리스트 큰 창을 만들자
-function TodoList({ title, cards }) {
+function TodoList({ data,handleCreateList }) {
+  const { title, cards,listID } = data;
+  const dispatch = useDispatch();
+  
+  const [text, setText] = useState('');
+
+
+  const handleChange = e => {
+    console.log('할 일', e.currentTarget.value );
+    setText(e.currentTarget.value);
+  };
+
+
+
+  const handleinsertCard =  text  => {
+    if(text) {
+      dispatch(insertCard(listID,text));
+    }
+  };
+
   return (
     <List>
       <h5>{title}</h5>
-      {cards.map((card) => (
-        <TodoCard text={card.text} />
+      {cards.map(card => (
+        <TodoCard 
+          key={card.id}
+          text={card.text}
+        />
       ))}
-      <TodoButtonWrapper />
+      <TodoButtonWrapper
+        text={text}
+        handleinsertCard={handleinsertCard}
+        handleChange={handleChange}
+
+
+      />
     </List>
   );
 }
